@@ -34,8 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.button:
                         String path = "http://v.juhe.cn/joke/content/list.php?key=c037fdc5bbb9e640d6b5a701dcb11441%20&page=1&pageSize=10&sort=asc&time=1418745237";
                         String jsonString = HttpUtils.getJsonContent(path);
+                        Log.i(TAG,"jsonString3:"+jsonString);
                         Person person = getPerson(jsonString,Person.class);
-                        Log.i(TAG,person.toString());
+                        Log.i(TAG,"person:"+person.toString());
                         break;
                     case R.id.button2:
                         String path2 = "http://v.juhe.cn/joke/content/list.php?key=c037fdc5bbb9e640d6b5a701dcb11441%20&page=1&pageSize=10&sort=asc&time=1418745237";

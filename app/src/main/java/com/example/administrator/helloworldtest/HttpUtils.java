@@ -1,5 +1,7 @@
 package com.example.administrator.helloworldtest;
 
+import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,11 +9,15 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HttpUtils {
+
+    private static final String TAG = "HttpUtils";
+    private static  String httpJsonString;
+
     public HttpUtils() {
                  // TODO Auto-generated constructor stub
              }
-
              public static String getJsonContent(String url_path) {
+
                 try {
                          URL url = new URL(url_path);
                          HttpURLConnection connection = (HttpURLConnection) url
@@ -21,12 +27,15 @@ public class HttpUtils {
                          connection.setDoInput(true);
                          int code = connection.getResponseCode();
                          if (code == 200) {
-                                 return changeInputStream(connection.getInputStream());
+                             httpJsonString = changeInputStream(connection.getInputStream());
+                             Log.v(TAG,"jsonString1:"+httpJsonString);
+                                 //return changeInputStream(connection.getInputStream());
                              }
                      } catch (Exception e) {
                          // TODO: handle exception
+                            Log.e(TAG,e.getMessage());
                      }
-                 return "";
+                 return httpJsonString;
              }
 
              private static String changeInputStream(InputStream inputStream) {
@@ -40,10 +49,12 @@ public class HttpUtils {
                                 outputStream.write(data, 0, len);
                              }
                          jsonString = new String(outputStream.toByteArray());
+                     Log.i(TAG,"jsonString2:"+jsonString);
                     } catch (IOException e) {
                          // TODO Auto-generated catch block
                         e.printStackTrace();
                      }
+                     Log.i(TAG,"jsonString4:"+jsonString);
                  return jsonString;
              }
 }
